@@ -1,0 +1,4 @@
+SPC + m + g + a - switch between implementation and header file
+    or . + g + a
+
+SPC + m + g + A - open impl/header file in new buffer 
