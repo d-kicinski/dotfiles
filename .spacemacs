@@ -9,18 +9,37 @@
    dotspacemacs-ask-for-lazy-installation t
    dotspacemacs-configuration-layer-path '()
 
+
    dotspacemacs-configuration-layers
    '(
-     ;; c++ config:
-     (c-c++ :variables c-c++-enable-clang-support t)
+     c-c++
+     shell-scripts
+     pandoc
+
+     (ranger :variables
+              ranger-show-preview t)
+
+     graphviz
+     windows-scripts
+     csv
+     vimscript
      helm
+     markdown
+     ipython-notebook
+     games
+     ;;kotlin
 
-     ;;markdown
+     (org :variables evil-org-mode t)
 
-     ;;(org :variables
-     ;;evil-org-mode t)
+     (python :variables
+             python-test-runner 'pytest
+             python-fill-column 80)
+             ;;python-sort-imports-on-save t)
+             ;;python-enable-yapf-format-on-save t)
 
-     python
+     ess
+
+     java
      rust
      emacs-lisp
      auto-completion
@@ -39,7 +58,7 @@
 
    dotspacemacs-additional-packages '()
    dotspacemacs-frozen-packages '()
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(exec-path-from-shell)
    dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
@@ -100,7 +119,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(leuven
+                         spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -267,6 +287,12 @@ values."
    dotspacemacs-whitespace-cleanup nil
    ))
 
+(defun my-setup-indent (n)
+ (setq c-basic-offset n)
+ (setq rust-indent-offset n)
+ (setq python-indent-offset n)
+  )
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -274,6 +300,16 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq python-guess-indent nil)
+  (my-setup-indent 4) ; indent 2 spaces width
+
+  (custom-set-variables
+   '(python-indent-offset 4))
+
+  (setq python-python-command "/home/dave/anaconda3/bin/python")
+
+  (setenv "WORKON_HOME" "/home/dave/anaconda3/envs")
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -284,17 +320,75 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; bigger latex fragments
+  ;;(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+
+  ;; EIN - notebook python config
+  (setq ein:use-auto-complete t)
+  ;; Or, to enable "superpack" (a little bit hacky improvements):
+  ;; (setq ein:use-auto-complete-superpack t)
+  ;; (setq ein:use-smartrep t)
+
+
   ;; settins for better rust autocompletion
   (setq racer-cmd "~/.cargo/bin/racer")
-  (setq racer-rust-src-path "/home/dave/.multirust/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/")
+  (setq racer-rust-src-path "/home/dave/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/")
 
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode)
-  ;; cpp lang:
-  (put 'helm-make-build-dir 'safe-local-variable 'stringp)
 
-  
+  ;; ycmd goto-anything
+  (spacemacs/set-leader-keys "og" 'ycmd-goto)
+
+  (setq indent-guide-recursive t)
+
+  ;; SPC q q now kill only frame not whole emacs
+  (evil-leader/set-key
+    "q q" 'spacemacs/frame-killer)
+
+  ;; < and > indent by this many chars
+  (setq-default evil-shift-width 4)
+
+  ;; Always indent with spaces, never tabs
+  (setq-default indent-tabs-mode nil)
+
+  ;; 80 colums for wrapping
+  (setq-default fill-column 80)
+  ;; Hard-wrap at 80 columns on for _everything_
+  (setq-default auto-fill-function 'do-auto-fill)
+
+  ;; Soft-wrap (visual wrap) always for long lines that don't fit on the screen
+  (global-visual-line-mode 1)
+
+  ;; Min number of lines to keep below/above the cursor in view.
+  (setq-default scroll-margin 4)
+
+  ;; Firefox as default browser
+  (setq-default browse-url-browser-function 'browse-url-generic
+                browse-url-generic-program "firefox")
+
+  ;; The below defadvice calls modify searching with '/' so that it recenters
+  ;; the screen after each jump.
+  (defadvice
+      evil-search-forward
+      (after evil-search-forward-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-forward)
+
+  (defadvice
+      evil-search-next
+      (after evil-search-next-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-next)
+
+  (defadvice
+      evil-search-previous
+      (after evil-search-previous-recenter activate)
+    (recenter))
+  (ad-activate 'evil-search-previous)
+
   (defun my-save-if-bufferfilename ()
     (if (buffer-file-name)
         (progn
@@ -303,7 +397,6 @@ you should place your code here."
       (message "no file is associated to this buffer: do nothing")
       )
     )
-
   (add-hook 'evil-insert-state-exit-hook 'my-save-if-bufferfilename)
 
 )
@@ -314,12 +407,40 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (disaster company-c-headers cmake-mode clang-format company-ycmd ycmd request-deferred let-alist deferred toml-mode racer flycheck-rust seq cargo rust-mode stickyfunc-enhance srefactor web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color smeargle shell-pop orgit org-projectile org-present org-pomodoro alert log4e gntp org-download multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (graphviz-dot-mode powershell csv-mode dash-functional ess-smart-equals ess-R-data-view ctable ess julia-mode ob-kotlin kotlin-mode flycheck-kotlin vimrc-mode dactyl-mode company-emacs-eclim eclim org-category-capture quelpa package-build evil-vimish-fold ein skewer-mode websocket js2-mode simple-httpd ob-ipython disaster company-c-headers cmake-mode clang-format company-ycmd ycmd request-deferred let-alist deferred toml-mode racer flycheck-rust seq cargo rust-mode stickyfunc-enhance srefactor web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color smeargle shell-pop orgit org-projectile org-present org-pomodoro alert log4e gntp org-download multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(python-guess-indent nil)
+ '(python-indent-guess-indent-offset nil)
+ '(python-indent-offset 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (pandoc-mode ox-pandoc ht graphviz-dot-mode powershell csv-mode dash-functional ess-smart-equals ess-R-data-view ctable ess julia-mode ob-kotlin kotlin-mode flycheck-kotlin vimrc-mode dactyl-mode company-emacs-eclim eclim org-category-capture quelpa package-build evil-vimish-fold ein skewer-mode websocket js2-mode simple-httpd ob-ipython disaster company-c-headers cmake-mode clang-format company-ycmd ycmd request-deferred let-alist deferred toml-mode racer flycheck-rust seq cargo rust-mode stickyfunc-enhance srefactor web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color smeargle shell-pop orgit org-projectile org-present org-pomodoro alert log4e gntp org-download multi-term magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help diff-hl company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(python-guess-indent nil t)
+ '(python-indent-guess-indent-offset nil)
+ '(python-indent-offset 4 t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
