@@ -1,0 +1,116 @@
+!#if __has_include(".extend.Xresources")
+!#include ".extend.Xresources"
+!#endif
+
+! ^ The above lines are no comments!
+! Leave them as they are if a file ~/.extend.Xresources is being used on your system.
+! config can be added there or also here below.
+! For comments use "!"
+
+
+!Darcula
+!#define t_background       #2b2b2b
+!#define t_current_line     #2b2b2b
+!#define t_selection        #333333
+!#define t_foreground       #a9b7c6
+!#define t_comment          #c7dd0c
+!#define t_red              #a02929
+!#define t_yellow           #fe9b00
+!#define t_bright_yellow    #ffc66d
+!#define t_green            #619647
+!#define t_bright_green     #7fb347
+!#define t_aqua             #a9b7c6
+!#define t_blue             #6897bb
+!#define t_purple           #664975
+!#define t_bright_purple	   #b777e0
+!#define t_grey		   #2b2b2b
+!#define t_bright_grey	   #888888
+
+!#define t_black		#2b2b2b
+
+#define t_black #FF0000
+
+#define t_red		#a02929
+#define t_green		#619647
+#define t_yellow	#a02929
+#define t_blue		#6897c6
+#define t_magenta	#664975
+#define t_cyan		#00b1b1
+#define t_white		#a9b7c6
+#define t_brightblack	#888888
+#define t_brightred	#c70202
+#define t_brightgreen	#4cd20c
+#define t_brightyellow	#a02929
+#define t_brightblue	#25a0fe
+#define t_brightmagenta	#b029f7
+#define t_brightcyan	#30f7f7
+#define t_brightwhite	#e4e8ed
+
+*.foreground:   t_white
+*.background:   t_black
+*.cursorColor:  t_white
+
+*.color0:	t_black
+*.color1:	t_red
+*.color2:	t_green
+*.color3:	t_yellow
+*.color4:	t_blue
+*.color5:	t_magenta
+*.color6:	t_cyan
+*.color7:	t_white
+*.color8:	t_brightblack
+*.color9:	t_brightred
+*.color10:	t_brightgreen
+*.color11:	t_brightyellow
+*.color12:	t_brightblue
+*.color13:	t_brightmagenta
+*.color14:	t_brightcyan
+*.color15:	t_brightwhite
+
+
+
+!URXVT CONFIGURATION
+URxvt.scrollBar: false
+URxvt.font: xft:Ubuntu mono:size=12
+URxvt.saveLines: 16384
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Left: \033[1;5D
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.backgroundPixmap: /home/honza/Pictures/kitty1.jpg;style=centered
+!Transparency with composite
+!URxvt.depth: 32
+!Fake transparency
+!URxvt.transparent: true
+!URxvt.shading: 5
+
+
+!ROFI CONFIGURATION
+rofi.run-shell-command: urxvt -e '{cmd}'
+!States: bg, fg, bgalt, hlbg, hlfg
+rofi.color-enabled: true
+rofi.hide-scrollbar: true
+rofi.color-normal: t_black,t_white,t_black,t_black,t_yellow
+rofi.color-urgent: t_black,t_red,t_black,t_black,t_yellow
+rofi.color-active: t_black,t_white,t_black,t_black,t_yellow
+!states: background, border
+rofi.color-window: t_black,t_magenta,t_magenta
+
+!rofi.sidebar-mode: true
+rofi.bw: 3
+rofi.columns: 1
+rofi.padding: 10
+rofi.eh: 2
+
+!rofi.fullscreen: true
+!rofi.opacity: 90
+!rofi.fake-transparency: true
+rofi.location: 6
+rofi.width: 100%
+rofi.font: System San Francisco 12
+rofi.lines: 6
+rofi.separator-style: none
+

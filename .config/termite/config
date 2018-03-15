@@ -1,0 +1,78 @@
+[options]
+allow_bold = true
+clickable_url = true
+dynamic_title = true
+font = Monospace 9
+icon_name = terminal
+scrollback_lines = 10000
+cursor_shape = block
+size_hints = false
+scrollbar = off
+
+[colors]
+# If both of these are unset, cursor falls back to the foreground color,
+# and cursor_foreground falls back to the background color.
+cursor = #dcdccc
+cursor_foreground = #dcdccc
+
+foreground = #dcdccc
+foreground_bold = #ffffff
+background = #3f3f3f
+
+# If unset, will reverse foreground and background
+highlight = #2f2f2f
+
+
+[colors]
+
+# special
+foreground      = #98d1ce
+foreground_bold = #98d1ce
+cursor          = #98d1ce
+background      = #181830
+
+# black
+color0  = #0a0f14
+color8  = #10151b
+
+# red
+color1  = #c33027
+color9  = #d83048
+
+# green
+color2  = #26a98b
+color10 = #081f2d
+
+# yellow
+color3  = #3078a8
+color11 = #245361
+
+# blue
+color4  = #195465
+color12 = #a80060
+
+# magenta
+color5  = #4e5165
+color13 = #888ba5
+
+# cyan
+color6  = #33859d
+color14 = #599caa
+
+# white
+color7  = #98d1ce
+color15 = #d3ebe9
+
+
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+
+# vim: ft=dosini cms=#%s

@@ -1,0 +1,241 @@
+{
+  "card_a_view books view state": {
+    "column_positions": {
+      "size": 4, 
+      "inlibrary": 0, 
+      "collections": 5, 
+      "authors": 2, 
+      "title": 1, 
+      "timestamp": 3
+    }, 
+    "hidden_columns": [], 
+    "column_alignment": {
+      "size": "center", 
+      "timestamp": "center"
+    }, 
+    "column_sizes": {
+      "size": 57, 
+      "inlibrary": 97, 
+      "collections": 107, 
+      "authors": 96, 
+      "title": 59, 
+      "timestamp": 74
+    }, 
+    "languages_injected": true, 
+    "sort_history": [
+      [
+        "timestamp", 
+        false
+      ]
+    ], 
+    "last_modified_injected": true
+  }, 
+  "tag browser search box visible": false, 
+  "choose-icon-theme-dialog-geometry": {
+    "__value__": "AdnQywACAAAAAADnAAAAJQAABG4AAALbAAAA6QAAACUAAARsAAAC2QAAAAAAAAAABVY=", 
+    "__class__": "bytearray"
+  }, 
+  "tag_browser_splitter_horizontal_state": [
+    true, 
+    200
+  ], 
+  "ask_to_manage_device": [
+    "4ff1b5360703"
+  ], 
+  "custom_colors_for_color_dialog": [
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ], 
+    [
+      255, 
+      255, 
+      255, 
+      255
+    ]
+  ], 
+  "cover_grid_color": [
+    80, 
+    80, 
+    80
+  ], 
+  "search bar visible": true, 
+  "memory_view books view state": {
+    "column_positions": {
+      "size": 4, 
+      "inlibrary": 0, 
+      "collections": 5, 
+      "authors": 2, 
+      "title": 1, 
+      "timestamp": 3
+    }, 
+    "hidden_columns": [], 
+    "column_alignment": {
+      "size": "center", 
+      "timestamp": "center"
+    }, 
+    "column_sizes": {
+      "size": 57, 
+      "inlibrary": 97, 
+      "collections": 107, 
+      "authors": 96, 
+      "title": 59, 
+      "timestamp": 74
+    }, 
+    "languages_injected": true, 
+    "sort_history": [
+      [
+        "timestamp", 
+        false
+      ]
+    ], 
+    "last_modified_injected": true
+  }, 
+  "quick_start_guide_added": true, 
+  "quickview visible": false, 
+  "grid view visible": false, 
+  "preferences dialog geometry": {
+    "__value__": "AdnQywACAAAAAADaAAAAGAAABH8AAALpAAAA3AAAABgAAAR9AAAC5wAAAAAAAAAABVY=", 
+    "__class__": "bytearray"
+  }, 
+  "duplicates-question-dialog-geometry": {
+    "__value__": "AdnQywACAAAAAAMAAAAAswAABR8AAAIvAAADAgAAALMAAAUdAAACLQAAAAAAAAAABVY=", 
+    "__class__": "bytearray"
+  }, 
+  "card_b_view books view state": {
+    "column_positions": {
+      "size": 4, 
+      "inlibrary": 0, 
+      "collections": 5, 
+      "authors": 2, 
+      "title": 1, 
+      "timestamp": 3
+    }, 
+    "hidden_columns": [], 
+    "column_alignment": {
+      "size": "center", 
+      "timestamp": "center"
+    }, 
+    "column_sizes": {
+      "size": 57, 
+      "inlibrary": 97, 
+      "collections": 107, 
+      "authors": 96, 
+      "title": 59, 
+      "timestamp": 74
+    }, 
+    "languages_injected": true, 
+    "sort_history": [
+      [
+        "timestamp", 
+        false
+      ]
+    ], 
+    "last_modified_injected": true
+  }, 
+  "library_usage_stats": {
+    "/home/dave/docs/books/calibre": 8
+  }, 
+  "toolbar_icon_size": "small", 
+  "book_details_splitter_horizontal_state": [
+    true, 
+    200
+  ], 
+  "cover_browser_splitter_vertical_state": [
+    false, 
+    300
+  ], 
+  "default_author_link": null, 
+  "show_emblems": false, 
+  "cover_grid_texture": null, 
+  "book_list_pin_splitter_state": {
+    "__value__": "AAAA/wAAAAEAAAACAAABAAAAAEYA/////wEAAAABAA==", 
+    "__class__": "bytearray"
+  }
+}
