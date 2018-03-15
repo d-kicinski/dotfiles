@@ -1,0 +1,6 @@
+
+source ~/.vimrc
+set incsearch
+set ignorecase
+set hlsearch
+set scrolloff 4
