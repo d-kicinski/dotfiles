@@ -1,7 +1,15 @@
 # Dotfiles
 
-## Dark themed emacs(exotica) + i3gaps
+## Dirty setup
 ![Alt Text](img/dark-gaps.png)
+On screen:
+* ranger - upper left
+* cmatrix - bottom left
+* emacs - right
 
-## Light theme emacs(soft-stone) + calibre + no-distraction mode
+## Light themed no-distraction mode
 ![Alt Text](img/light-focus.png)
+On screen:
+* emacs - left
+* calibre view - right
+
