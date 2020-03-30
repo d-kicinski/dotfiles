@@ -1,0 +1,11 @@
+source ~/.config/nvim/init.vim
+
+nmap f <Plug>(easymotion-bd-f2)
+
+set easymotion
+set commentary
+
+map <leader>r :action ReformatCode<CR>
+map <leader>ff :action GotoFile<CR>
+
+
