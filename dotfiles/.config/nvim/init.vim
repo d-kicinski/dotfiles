@@ -28,6 +28,7 @@ call plug#begin()
 call plug#end()
 
 map <Space> <Leader>
+set clipboard+=unnamedplus
 
 set background=dark
 colorscheme space_vim_theme
