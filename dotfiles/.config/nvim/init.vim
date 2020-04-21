@@ -24,6 +24,7 @@ call plug#begin()
     " Markdown 
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
+    Plug 'walterl/listoggle'
 
 call plug#end()
 

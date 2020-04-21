@@ -1,12 +1,59 @@
 source ~/.config/nvim/init.vim
 
-nmap f <Plug>(easymotion-bd-f2)
-
-set easymotion
 set commentary
 set ideajoin
 
+nmap f  :action AceAction<CR>
+
 map <leader>r :action ReformatCode<CR>
-map <leader>ff :action GotoFile<CR>
+
+map <leader>qr : source ~/.ideavimrc<CR>
 
 
+" Reload .ideavimrc
+nnoremap <leader>feR    :source ~/.ideavimrc<CR>
+vnoremap <leader>feR    <Esc>:source ~/.ideavimrc<CR>
+
+" Search everywhare
+nnoremap <leader><Space>    :action SearchEverywhere<CR>
+nnoremap <leader><Space>    :action SearchEverywhere<CR>
+nnoremap <C-h>    :action SearchEverywhere.NextTab<CR>
+nnoremap <C-l>    :action SearchEverywhere.PrevTab<CR>
+
+" Execute an action. Like <M-x>
+nnoremap <leader>fa    :action GotoAction<CR>
+vnoremap <leader>fa    :action GotoAction<CR>
+
+" Find files
+nnoremap <leader>ff    :action GotoFile<CR>
+vnoremap <leader>ff    :action GotoFile<CR>
+
+" Find class
+nnoremap <leader>fc    :action GotoFile<CR>
+vnoremap <leader>fc    :action GotoFile<CR>
+
+" Find symbol
+nnoremap <leader>fs    :action GotoSymbol<CR>
+vnoremap <leader>fs    :action GotoSymbol<CR>
+
+" Recent files
+nnoremap <leader>fr    :action RecentFiles<CR>
+vnoremap <leader>fr    :action RecentFiles<CR>
+
+
+
+" Focus on project window.
+" Sadly when you are inside the project window this key binding does not work
+" anymore. You can use <A-1> if you want to close the window or <Esc> if you
+" want to leave the window opened and focus on the code.
+nnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
+vnoremap <leader>ft    :action ActivateProjectToolWindow<CR>
+
+
+" Show key bindings
+nnoremap <leader>?    :map<CR>
+vnoremap <leader>?    <Esc>:map<CR>
+
+" Insert snippet
+nnoremap <leader>is    :action InsertLiveTemplate<CR>
+vnoremap <leader>is    <Esc>:action InsertLiveTemplate<CR>
