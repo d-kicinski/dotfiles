@@ -29,8 +29,8 @@ nnoremap <leader>ff    :action GotoFile<CR>
 vnoremap <leader>ff    :action GotoFile<CR>
 
 " Find class
-nnoremap <leader>fc    :action GotoFile<CR>
-vnoremap <leader>fc    :action GotoFile<CR>
+nnoremap <leader>fc    :action GotoClass<CR>
+vnoremap <leader>fc    :action GotoClass<CR>
 
 " Find symbol
 nnoremap <leader>fs    :action GotoSymbol<CR>
