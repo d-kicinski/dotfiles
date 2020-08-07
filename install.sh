@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -x
+
 # Installs dotfiles and helpers
 
 realpath() {
@@ -16,14 +19,25 @@ file_link(){
 SCRIPT_PATH=`realpath $0`
 DOTFILES=`dirname $SCRIPT_PATH`
 
+mkdir -p $HOME/bin
+
+# Install neovim
+wget https://github.com/neovim/neovim/releases/download/v0.4.4/nvim.appimage
+chmod +x ./nvim.appimage
+mv nvim.appimage $HOME/bin/nvim
+mkdir -p $HOME/.config/nvim
+
+# Install vim-plug
+curl -fLo \
+    $HOME/.local/share/nvim/site/autoload/plug.vim \
+    --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # Install dotfiles
 for f in $(find "${DOTFILES}/dotfiles" -type f); do
     file_link "${f}"
 done
 
-
-# Updates vim help tags
-vim "+helptags ~/.vim/doc" "+q"
 
 # Create persistent undo dir for vim
 mkdir -p ~/.vim/undo
