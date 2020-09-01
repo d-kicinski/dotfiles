@@ -38,6 +38,10 @@ for f in $(find "${DOTFILES}/dotfiles" -type f); do
     file_link "${f}"
 done
 
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 
 # Create persistent undo dir for vim
 mkdir -p ~/.vim/undo
