@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+for bin in  /usr/share/gcc-arm-none-eabi-9-2020-q2-update/bin/*
+do
+    sudo ln -s $bin /usr/bin/$(basename $bin)
+done
+
