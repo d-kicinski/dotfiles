@@ -33,6 +33,12 @@ curl -fLo \
     --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+
+# Install nodejs
+curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+sudo apt install -y nodejs
+
+
 # Install dotfiles
 for f in $(find "${DOTFILES}/dotfiles" -type f); do
     file_link "${f}"
