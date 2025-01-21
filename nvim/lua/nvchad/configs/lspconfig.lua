@@ -80,6 +80,16 @@ M.defaults = function()
       },
     },
   }
+
+  require("lspconfig").clangd.setup {
+    cmd = { "clangd", "--clang-tidy", "--completion-style=detailed" },
+    filetypes = { "cpp", "opencl" },
+    settings = {
+      clangd = {
+          checkUpdates = true,
+      },
+    },
+  } 
 end
 
 return M

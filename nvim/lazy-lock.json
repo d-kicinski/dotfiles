@@ -1,6 +1,5 @@
 {
   "LuaSnip": { "branch": "master", "commit": "8d7aa7a7b7c0875e4878d1d2590924bc1c229305" },
-  "NvChad": { "branch": "v2.5", "commit": "09dd13e9c6df98fe5609829a7a0fbccea2f515ae" },
   "base46": { "branch": "v2.5", "commit": "f006ffdd0e4c0a8b1a639713f5208bc282c60058" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "39e2eda76828d88b773cc27a3f61d2ad782c922d" },
@@ -12,6 +11,7 @@
   "gitsigns.nvim": { "branch": "main", "commit": "7c27a30450130cd59c4994a6755e3c5d74d83e76" },
   "indent-blankline.nvim": { "branch": "master", "commit": "04e44b09ee3ff189c69ab082edac1ef7ae2e256c" },
   "lazy.nvim": { "branch": "main", "commit": "cf8ecc2c5e4332760431a33534240b0cbc6680ab" },
+  "leap.nvim": { "branch": "main", "commit": "67d26a13cfbf558450955ee9c76e78e03d13ee9e" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "menu": { "branch": "main", "commit": "9269d8ff5775bb1b9b9cad538d1bcd13fa105fe7" },
   "minty": { "branch": "main", "commit": "6e5c4cfc66e5dbb248ab78293d1c147de0c33a54" },

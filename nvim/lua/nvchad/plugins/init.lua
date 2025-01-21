@@ -1,4 +1,16 @@
 return {
+  -- Custom plugins
+  {
+  "ggandor/leap.nvim",
+  lazy = false,  -- Load the plugin immediately
+  config = function()
+    -- require('leap').add_default_mappings() -- Default s/S mappings
+
+    -- vim.keymap.set('n', '<Leader><Space>', "<cmd>lua require('leap').leap({ multi_windows = true })<CR>", { desc = "Leap across windows" })
+    vim.keymap.set('n', '<Leader><Space>', '<Plug>(leap)')
+  end,
+},
+  -- NvChad plugins
   "nvim-lua/plenary.nvim",
 
   {
